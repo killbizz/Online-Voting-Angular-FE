@@ -1,10 +1,12 @@
 .container{
+    height: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
 .login{
+    margin: 2em;
     text-align: center;
     display: block;
     height: 100%;

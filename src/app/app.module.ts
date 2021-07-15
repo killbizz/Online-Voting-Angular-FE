@@ -1,6 +1,6 @@
 import { FormsModule } from '@angular/forms';
 import { AuthService } from './services/auth.service';
-import { SynthesizerService } from './services/synthesizer.service';
+import { ServicesService } from './services/services.service';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
@@ -28,7 +28,7 @@ import { SignUpComponent } from './sign-up/sign-up.component';
     NgbModule,
     FormsModule
   ],
-  providers: [SynthesizerService, AuthService],
+  providers: [ServicesService, AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

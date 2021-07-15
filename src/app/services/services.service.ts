@@ -7,19 +7,19 @@ import getlambdaResponse from 'src/app/lib/lambdas';
 @Injectable({
   providedIn: 'root'
 })
-export class SynthesizerService {
+export class ServicesService {
 
   constructor() { }
 
-  insertSynthesizer = async (synth: NewSynthesizer): Promise<boolean> => {
-    const { response } = (
-      await getlambdaResponse("synth", "POST", JSON.stringify(synth))
-    ).props;
-    if (response.err !== undefined) {
-      return false;
-    }
-    return true;
-  };
+  // insertUser = async (user: NewSynthesizer): Promise<string> => {
+  //   const { response } = (
+  //     await getlambdaResponse("user", "POST", JSON.stringify(user))
+  //   ).props;
+  //   if (response.code !== undefined) {
+  //     return response.message;
+  //   }
+  //   return response.jwtToken;
+  // };
 
   deleteSynthesizer = async (id: number): Promise<void> => {
     await getlambdaResponse(`synth/${id}`, "DELETE", null);

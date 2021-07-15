@@ -22,10 +22,10 @@ export class SignUpComponent implements OnInit {
   signUp = async (form: NgForm) => {
     if(form.valid){
       const email: string = form.value.email;
-      const username: string = form.value.username;
       const password: string = form.value.password;
+      const username: string = form.value.username;
 
-      const user: User = new User(email, username, password);
+      const user: User = new User(email, password, username);
 
       
 
