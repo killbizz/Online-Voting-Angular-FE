@@ -20,16 +20,16 @@ describe('AppComponent', () => {
     expect(app).toBeTruthy();
   });
 
-  it(`should have as title 'Online-Voting-FE'`, () => {
+  it(`should have as title 'SynthesizersShowcase'`, () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
-    expect(app.title).toEqual('Online-Voting-FE');
+    expect(app.title).toEqual('SynthesizersShowcase');
   });
 
   it('should render title', () => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
     const compiled = fixture.nativeElement;
-    expect(compiled.querySelector('.content span').textContent).toContain('Online-Voting-FE app is running!');
+    expect(compiled.querySelector('.content span').textContent).toContain('SynthesizersShowcase app is running!');
   });
 });

@@ -1,0 +1,55 @@
+<div class="container">
+    <div class="sign-up">
+        <main>
+            <h1 class="mb-1 fw-normal text-center">Sign Up</h1>
+            <form name="signUpForm" #f="ngForm" (ngSubmit)="signUp(f)">
+              <img class="mb-1" id="synthShowcaseIcon" src="../../assets/synthesizer.png" alt="Synthesizers Showcase Image" width="280" height="280">      
+              <div class="form-floating">
+                <input required email ngModel #email="ngModel" type="email" class="form-control" id="email" name="email" placeholder="name@example.com">
+                <label for="email">Email address</label>
+                <div *ngIf="email.dirty && email.touched && email.invalid">
+                    <div class="alert-danger text-center" *ngIf="email.errors?.required">
+                        Required field
+                    </div>
+                    <div class="alert-danger text-center" *ngIf="email.errors?.email">
+                        You must insert a valid email
+                    </div>
+                </div>
+              </div>
+    
+              <div class="form-floating">
+                <input required minlength="6" ngModel #username="ngModel" type="text" class="form-control" id="username" name="username" placeholder="Username">
+                <label for="username">Username</label>
+                <div *ngIf="username.dirty && username.touched && username.invalid">
+                    <div class="alert-danger text-center" *ngIf="username.errors?.required">
+                        Required field
+                    </div>
+                    <div class="alert-danger text-center" *ngIf="username.errors?.minlength">
+                        The username must have at least 6 characters
+                    </div>
+                </div>
+              </div>
+    
+              <div class="form-floating">
+                <input required ngModel #password="ngModel" minlength="8" type="password" class="form-control" id="password" name="password" placeholder="Password">
+                <label for="password">Password</label>
+                <div *ngIf="password.dirty && password.touched && password.invalid">
+                    <div class="alert-danger text-center" *ngIf="password.errors?.required">
+                        Required field
+                    </div>
+                    <div class="alert-danger text-center" *ngIf="password.errors?.minlength">
+                        The passowrd must have at least 8 characters
+                    </div>
+                </div>
+              </div>
+              <button [disabled]="!f.valid" class="w-100 btn btn-lg btn-primary" type="submit">Sign Up</button>
+            </form>
+            <a href="" routerLink="/login">Login</a>
+          </main>
+          <div>
+            <ngb-alert *ngIf="signUpFailed" class="show fade" ng-reflect-type="danger" type='danger' (closed)="closeAlert()">
+                {{alert}}
+              </ngb-alert>  
+          </div>
+    </div>
+</div>

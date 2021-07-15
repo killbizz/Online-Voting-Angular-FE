@@ -1,0 +1,41 @@
+<div class="container">
+  <div class="login">
+    <main>
+        <h1 class="mb-1 fw-normal text-center">Login</h1>
+        <form name="loginForm" #f="ngForm" (ngSubmit)="signIn(f)">
+          <img class="mb-1" id="synthShowcaseIcon" src="../../assets/synthesizer.png" alt="Synthesizers Showcase Image" width="280" height="280">  
+          <div class="form-floating">
+            <input required email ngModel #email="ngModel" type="email" class="form-control" id="email" name="email" placeholder="name@example.com">
+            <label for="email">Email address</label>
+            <div *ngIf="email.dirty && email.touched && email.invalid">
+                <div class="alert-danger text-center" *ngIf="email.errors?.required">
+                    Required field
+                </div>
+                <div class="alert-danger text-center" *ngIf="email.errors?.email">
+                    You must insert a valid email
+                </div>
+            </div>
+          </div>
+          <div class="form-floating">
+            <input required ngModel #password="ngModel" minlength="8" type="password" class="form-control" id="password" name="password" placeholder="Password">
+            <label for="password">Password</label>
+            <div *ngIf="password.dirty && password.touched && password.invalid">
+                <div class="alert-danger text-center" *ngIf="password.errors?.required">
+                    Required field
+                </div>
+                <div class="alert-danger text-center" *ngIf="password.errors?.minlength">
+                    The passowrd must have at least 8 characters
+                </div>
+            </div>
+          </div>
+          <button [disabled]="!f.valid" class="w-100 btn btn-lg btn-primary" type="submit">Sign in</button>
+        </form>
+        <a href="" routerLink="/sign-up">Sign Up</a>
+      </main>
+      <div>
+        <ngb-alert *ngIf="loginFailed" class="show fade" ng-reflect-type="danger" type='danger' (closed)="closeAlert()">
+          {{alert}}
+        </ngb-alert>  
+      </div>
+  </div>
+</div>

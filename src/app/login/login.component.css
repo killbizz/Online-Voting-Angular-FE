@@ -1,0 +1,12 @@
+.container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.login{
+    text-align: center;
+    display: block;
+    height: 100%;
+    width: 30%;
+}
