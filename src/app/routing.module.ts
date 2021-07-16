@@ -1,3 +1,4 @@
+import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
 import { SignUpComponent } from './sign-up/sign-up.component';
 import { LoginComponent } from './login/login.component';
 import { NgModule } from '@angular/core';
@@ -25,6 +26,11 @@ const routes : Routes = [
   {
     path: 'sign-up',
     component: SignUpComponent
+  },
+  {
+    path: 'dashboard',
+    component: AdminDashboardComponent,
+    canActivate: [RouteGuardService]
   }
 ]
 
