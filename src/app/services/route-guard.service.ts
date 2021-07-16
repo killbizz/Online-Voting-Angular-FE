@@ -8,6 +8,8 @@ import { Observable } from 'rxjs';
 })
 export class RouteGuardService implements CanActivate {
 
+  // TODO : creare due GuardService diversi per controllare l'attivazione delle rotte in base al ruolo (admin - user)
+
   constructor(private authService: AuthService, private router: Router) { }
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean | UrlTree | Observable<boolean | UrlTree> | Promise<boolean | UrlTree> {
