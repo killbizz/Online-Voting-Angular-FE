@@ -20,6 +20,7 @@ export class NavbarComponent implements OnInit {
     });
     this.authService.userLoggedOut.subscribe(() => {
       this.isUserLogged = false;
+      this.isUserAdmin = false;
     });
     router.events.forEach((event) => {
       if(event instanceof NavigationEnd) {

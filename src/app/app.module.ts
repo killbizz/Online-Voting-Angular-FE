@@ -17,6 +17,7 @@ import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.compo
 import { AdminNewElectionComponent } from './admin-new-election/admin-new-election.component';
 import { AdminElectionListComponent } from './admin-election-list/admin-election-list.component';
 import { ElectionService } from './services/election.service';
+import { AdminElectionDetailComponent } from './admin-election-detail/admin-election-detail.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { ElectionService } from './services/election.service';
     SignUpComponent,
     AdminDashboardComponent,
     AdminNewElectionComponent,
-    AdminElectionListComponent
+    AdminElectionListComponent,
+    AdminElectionDetailComponent
   ],
   imports: [
     BrowserModule,
