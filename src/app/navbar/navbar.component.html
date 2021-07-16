@@ -19,21 +19,21 @@
                 <a class="nav-link" href="" routerLink="">Homepage</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="" routerLink="synths">Elections</a>
+                <a class="nav-link" href="" routerLink="">Elections</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="" routerLink="synths/new">Dashboard</a>
+                <a  *ngIf="isUserAdmin"class="nav-link" href="" routerLink="dashboard">Dashboard</a>
               </li>
           </ul>
         </div>
         <div class="navbar-nav">
             <div class="nav-item text-nowrap">
-              <a *ngIf="!userLogged && !userInLoginOrSignUpPage" class="nav-link px-3" href="#" (click)="login($event)">Login</a>
+              <a *ngIf="!isUserLogged && !isUserInLoginOrSignUpPage" class="nav-link px-3" href="#" (click)="login($event)">Login</a>
             </div>
         </div>
         <div class="navbar-nav">
             <div class="nav-item text-nowrap">
-              <a *ngIf="userLogged && !userInLoginOrSignUpPage" class="nav-link px-3" href="#" (click)="logout($event)">Logout</a>
+              <a *ngIf="isUserLogged && !isUserInLoginOrSignUpPage" class="nav-link px-3" href="#" (click)="logout($event)">Logout</a>
             </div>
         </div>
     </div>

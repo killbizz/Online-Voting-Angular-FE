@@ -9,29 +9,32 @@ import { AuthService } from '../services/auth.service';
 })
 export class NavbarComponent implements OnInit {
 
-  userLogged: boolean = false;
-  userInLoginOrSignUpPage: boolean = false;
+  isUserLogged: boolean = false;
+  isUserInLoginOrSignUpPage: boolean = false;
+  isUserAdmin: boolean = false;
 
   constructor(private authService: AuthService, private router: Router) {
     this.authService.userSignedIn.subscribe(() => {
-      this.userLogged = true;
+      this.isUserLogged = true;
+      this.isUserAdmin = this.authService.isUserAdmin();
     });
     this.authService.userLoggedOut.subscribe(() => {
-      this.userLogged = false;
+      this.isUserLogged = false;
     });
     router.events.forEach((event) => {
       if(event instanceof NavigationEnd) {
         if(event.url === '/login' || event.url === '/sign-up'){
-          this.userInLoginOrSignUpPage = true;
+          this.isUserInLoginOrSignUpPage = true;
         } else {
-          this.userInLoginOrSignUpPage = false;
+          this.isUserInLoginOrSignUpPage = false;
         }
       }
     });
   }
 
   ngOnInit(): void {
-    this.userLogged = this.authService.isUserLoggedIn();
+    this.isUserLogged = this.authService.isUserLoggedIn();
+    this.isUserAdmin = this.authService.isUserAdmin();
   }
 
   login(event: any){
