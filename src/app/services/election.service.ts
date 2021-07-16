@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Election } from '../classes/Election';
-import getlambdaResponse from '../lib/lambdas';
+import getBackendResponse from '../lib/endpoints';
 
 @Injectable({
   providedIn: 'root'
@@ -11,12 +11,29 @@ export class ElectionService {
 
   getElections = async (): Promise<Election[]> => {
     const { response } = (
-      await getlambdaResponse("election", "GET", null)
+      await getBackendResponse("election", "GET", null)
     ).props;
     if (response._embedded === undefined) {
       return [];
     }
-    return response._embedded.election;
-  };
+    return response._embedded.election.sort((a: Election,b : Election) => {
+      if(a.startDate < b.startDate){
+        return -1;
+      }
+      if(a.id > b.id){
+        return 1;
+      }
+      return 0;
+    })
+  }
+
+  newElection = async (election: Election): Promise<boolean> => {
+    const { response } = ( await getBackendResponse("election", "POST", JSON.stringify(election))).props;
+    console.log(response);
+    if(response.error !== undefined){
+      return false;
+    }
+    return true;
+  }
 
 }

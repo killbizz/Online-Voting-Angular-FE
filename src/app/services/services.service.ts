@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 
-import getlambdaResponse from 'src/app/lib/lambdas';
+import getlambdaResponse from 'src/app/lib/endpoints';
 
 @Injectable({
   providedIn: 'root'

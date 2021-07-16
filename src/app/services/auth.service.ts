@@ -1,6 +1,6 @@
 import { Injectable, Output, EventEmitter } from '@angular/core';
 import { User } from '../classes/User';
-import getlambdaResponse from '../lib/lambdas';
+import getBackendResponse from '../lib/endpoints';
 
 @Injectable({
   providedIn: 'root'
@@ -29,7 +29,7 @@ export class AuthService {
       password: password
     };
     const { response } = (
-      await getlambdaResponse("login", "POST", JSON.stringify(credentials))
+      await getBackendResponse("login", "POST", JSON.stringify(credentials))
     ).props;
     if (response.jwtToken === undefined) {
       return false;
@@ -45,7 +45,7 @@ export class AuthService {
 
   signUp = async (user: User) : Promise<boolean> => {
     const { response } = (
-      await getlambdaResponse("user", "POST", JSON.stringify(user))
+      await getBackendResponse("user", "POST", JSON.stringify(user))
     ).props;
     if (response.code !== undefined) {
       return false;
