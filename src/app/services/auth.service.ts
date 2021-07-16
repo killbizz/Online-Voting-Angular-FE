@@ -7,17 +7,20 @@ import getlambdaResponse from '../lib/lambdas';
 })
 export class AuthService {
 
-  private userLogged: boolean = false;
-  private userRole: String = "";
+  private userLogged: boolean = !!localStorage.getItem("jwtToken");
+  private userRole: String | null = !!localStorage.getItem("jwtToken") ? localStorage.getItem("userRole") : null;
   @Output() userSignedIn = new EventEmitter();
   @Output() userLoggedOut = new EventEmitter();
   @Output() userSignedUp = new EventEmitter();
 
   constructor() { }
 
-  isUserLoggedIn() : boolean{
-    this.userLogged = !!localStorage.getItem("token");
+  isUserLoggedIn() : boolean {
     return this.userLogged;
+  }
+
+  isUserAdmin() : boolean {
+    return this.isUserLoggedIn() && this.userRole === "admin";
   }
 
   signIn = async (email: string, password: string): Promise<boolean> => {
@@ -34,23 +37,17 @@ export class AuthService {
     this.userLogged = true;
     this.userRole = response.role;
     localStorage.setItem("jwtToken", response.jwtToken);
+    // TODO : creo un endpoint nel backend che mi restituisca il ruolo dato un JWT
+    localStorage.setItem("userRole", response.role);
     this.userSignedIn.emit();
     return true;
   }
 
   signUp = async (user: User) : Promise<boolean> => {
-    // check if exists already a user with user.email
-    const res = (
-      await getlambdaResponse("user/"+user.email, "GET", null)
-    ).props.response;
-    if(res.error === undefined){
-      return false;
-    }
-    // create the new user
     const { response } = (
       await getlambdaResponse("user", "POST", JSON.stringify(user))
     ).props;
-    if (response.cause !== undefined) {
+    if (response.code !== undefined) {
       return false;
     }
     this.userSignedUp.emit();
@@ -59,7 +56,9 @@ export class AuthService {
 
   logout(): void {
     localStorage.removeItem("jwtToken");
+    localStorage.removeItem("userRole");
     this.userLogged = false;
+    this.userRole = null;
     this.userLoggedOut.emit();
   }
 }
