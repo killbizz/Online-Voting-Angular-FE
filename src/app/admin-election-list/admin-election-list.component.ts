@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Election } from '../classes/Election';
+import { ElectionService } from '../services/election.service';
 
 @Component({
   selector: 'app-admin-election-list',
@@ -7,9 +9,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AdminElectionListComponent implements OnInit {
 
-  constructor() { }
+  elections: Election[] = [];
+
+  constructor(private electionService: ElectionService) { }
 
   ngOnInit(): void {
+    this.getAllElections();
   }
 
+  getAllElections = async () => {
+    this.elections = await this.electionService.getElections();
+  }
 }
