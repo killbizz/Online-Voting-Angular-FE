@@ -1,3 +1,4 @@
+import { HomepageComponent } from './homepage/homepage.component';
 import { FormsModule } from '@angular/forms';
 import { AuthService } from './services/auth.service';
 import { ServicesService } from './services/services.service';
@@ -12,14 +13,22 @@ import { RoutingModule } from './routing.module';
 import { LoginComponent } from './login/login.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { SignUpComponent } from './sign-up/sign-up.component';
+import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
+import { AdminNewElectionComponent } from './admin-new-election/admin-new-election.component';
+import { AdminElectionListComponent } from './admin-election-list/admin-election-list.component';
+import { ElectionService } from './services/election.service';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavbarComponent,
+    HomepageComponent,
     FooterComponent,
     LoginComponent,
-    SignUpComponent
+    SignUpComponent,
+    AdminDashboardComponent,
+    AdminNewElectionComponent,
+    AdminElectionListComponent
   ],
   imports: [
     BrowserModule,
@@ -28,7 +37,7 @@ import { SignUpComponent } from './sign-up/sign-up.component';
     NgbModule,
     FormsModule
   ],
-  providers: [ServicesService, AuthService],
+  providers: [ServicesService, AuthService, ElectionService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
