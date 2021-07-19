@@ -8,9 +8,18 @@
     <div class="modal-body">
       <form name="DetailsForm" #f="ngForm" (ngSubmit)="updateElection(f)">
         <div class="form-group row">
-          <label for="staticEmail" class="col-sm-2 col-form-label">Email</label>
+          <label for="name" class="col-sm-2 col-form-label">Name</label>
           <div class="col-sm-10">
-            <input type="text" readonly class="form-control-plaintext text-center" id="staticEmail" value="email@example.com">
+            <input type="text" [readonly]="userWantsToUpdate ? null : 'readonly'" class="form-control-plaintext text-center" id="name" value="{{election.name.charAt(0).toUpperCase() + election.name.slice(1)}}">
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="type" class="col-sm-2 col-form-label">Type</label>
+          <div class="col-sm-10">
+            <select type="text" [disabled]="userWantsToUpdate ? null : 'disabled'" class="form-control-plaintext text-center" id="type">
+              <option [selected]="election.type === 'municipal'">Municipal</option>
+              <option [selected]="election.type === 'regional'">Regional</option>
+            </select>
           </div>
         </div>
         <div class="form-group">
@@ -22,14 +31,32 @@
             </div>
           </div>
         </div>
-        <button *ngIf="userWantsToUpdate" type="submit" class="btn btn-outline-primary" (click)="modal.close('Save click'); disableUpdateElection() ">Save</button>
+        <div class="form-group">
+          <label for="endDate">End Date</label>
+          <div class="input-group">
+            <input id="endDate" class="form-control" [readonly]="userWantsToUpdate ? null :'readonly'" placeholder="{{election.endDate}}" name="dp" ngbDatepicker #dp="ngbDatepicker">
+            <div class="input-group-append">
+              <button class="btn btn-outline-secondary calendar" [disabled]="userWantsToUpdate ? null : 'disabled'" (click)="dp.toggle()" type="button"></button>
+            </div>
+          </div>
+        </div>
+        <p>Political Parties</p>
+        <div *ngFor="let party of parties" class="form-group">
+          <div class="form-control">
+            <label class="checkbox-inline">
+              <input type="checkbox" [disabled]="userWantsToUpdate ? null : 'disabled'" name="{{party.name}}" [checked]="election.parties.indexOf(party.id) > -1 ? true : false" value="{{party.id}}" /> {{party.name}}
+            </label>
+          </div>
+        </div>
+        <button *ngIf="userWantsToUpdate" type="submit" class="btn btn-outline-primary mr-2" (click)="modal.close('Save click'); disableUpdateElection() ">Save</button>
+        <button *ngIf="userWantsToUpdate" type="button" class="btn btn-outline-danger" (click)="disableUpdateElection()">Cancel</button>
       </form>
     </div>
     <div class="modal-footer">
-      <button type="button" class="btn btn-warning btn-sm px-4 me-md-2" (click) = "enableUpdateElection()">Edit</button>
-      <button type="button" class="btn btn-danger btn-sm px-4 me-md-2" (click) = "deleteElection()">Delete</button>
+      <button *ngIf="!userWantsToUpdate" type="button" class="btn btn-warning btn-sm px-4 me-md-2" (click)="enableUpdateElection()">Edit</button>
+      <button *ngIf="!userWantsToUpdate" type="button" class="btn btn-danger btn-sm px-4 me-md-2" (click)="modal.close('Delete item'); deleteElection()">Delete</button>
     </div>
   </ng-template>
   
-  <button class="btn btn-sm btn-outline-secondary mr-2" (click)="open(content)">Details</button>
+  <button class="btn btn-sm btn-secondary mr-2" (click)="open(content)">Details</button>
   

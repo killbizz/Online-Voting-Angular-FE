@@ -1,7 +1,9 @@
 import { NgForm } from '@angular/forms';
 import { Component, Input, OnInit } from '@angular/core';
-import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Election } from '../classes/Election';
+import { Party } from '../classes/Party';
+import { PartyService } from '../services/party.service';
 
 @Component({
   selector: 'app-admin-election-detail',
@@ -10,31 +12,24 @@ import { Election } from '../classes/Election';
 })
 export class AdminElectionDetailComponent implements OnInit {
 
-  closeResult: string = '';
   @Input() election!: Election;
   userWantsToUpdate: boolean = false;
+  parties: Party[] = [];
 
-  constructor(private modalService: NgbModal) { }
+  constructor(private modalService: NgbModal, private partyService: PartyService) {   }
 
   ngOnInit(): void {
+    this.getParties();
+  }
+
+  getParties = async () => {
+    this.parties = await this.partyService.getParties();
   }
 
   open = (content: any) => {
-    this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
-      this.closeResult = `Closed with: ${result}`;
-    }, (reason) => {
-      this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+    this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.finally(() => {
+      this.disableUpdateElection();
     });
-  }
-
-  private getDismissReason = (reason: any): string => {
-    if (reason === ModalDismissReasons.ESC) {
-      return 'by pressing ESC';
-    } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
-      return 'by clicking on a backdrop';
-    } else {
-      return `with: ${reason}`;
-    }
   }
 
   enableUpdateElection() {
@@ -50,7 +45,7 @@ export class AdminElectionDetailComponent implements OnInit {
   }
 
   deleteElection = async () => {
-    //service.delete(id)
+    this.partyService.deleteParty(this.election.id);
   }
 
 }

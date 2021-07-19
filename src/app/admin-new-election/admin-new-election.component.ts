@@ -16,17 +16,6 @@ export class AdminNewElectionComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  beforeChange($event: NgbPanelChangeEvent) {
-    console.log($event.panelId);
-    if ($event.panelId === 'panelOne') {
-      $event.preventDefault();
-    }
-
-    if ($event.panelId === 'panelTwo' && $event.nextState === false) {
-      $event.preventDefault();
-    }
-  }
-
   newElection = async (form: NgForm) => {
     if(form.valid){
       const email: string = form.value.email;
