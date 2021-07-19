@@ -8,49 +8,65 @@
             <a type="button" class="btn btn-outline-secondary btn-lg px-4">New Election</a>
         </ng-template>
         <ng-template ngbPanelContent>
-            <form name="signUpForm" #f="ngForm" (ngSubmit)="newElection(f)">      
+            <form name="newElectionForm" id="newElectionForm" #f="ngForm" (ngSubmit)="newElection(f, $event)">      
                 <div class="form-floating">
-                  <input required email ngModel #email="ngModel" type="email" class="form-control" id="email" name="email" placeholder="name@example.com">
-                  <label for="email">Email address</label>
-                  <div *ngIf="email.dirty && email.touched && email.invalid">
-                      <div class="alert-danger text-center" *ngIf="email.errors?.required">
-                          Required field
-                      </div>
-                      <div class="alert-danger text-center" *ngIf="email.errors?.email">
-                          You must insert a valid email
-                      </div>
-                  </div>
+                    <div class="form-group row">
+                        <label for="name" class="col-sm-2 col-form-label">Name</label>
+                        <div class="col-sm-10">
+                          <input required minlength="6" ngModel #name="ngModel" type="text" class="form-control text-center" id="name" name="name" placeholder="Election Name">
+                        </div>
+                    </div>
+                    <div *ngIf="name.dirty && name.touched && name.invalid">
+                        <div class="alert-danger text-center" *ngIf="name.errors?.required">
+                            Required field
+                        </div>
+                        <div class="alert-danger text-center" *ngIf="name.errors?.minlength">
+                            The name must have at least 6 characters
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="type" class="col-sm-2 col-form-label">Type</label>
+                        <div class="col-sm-10">
+                            <select class="form-control-plaintext text-center" id="type" name="type">
+                                <option selected >municipal</option>
+                                <option>regional</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="startDate">Start Date</label>
+                        <div class="input-group">
+                            <input required ngModel #startDate="ngModel" class="form-control" placeholder="Select a date" name="dpStartDate" ngbDatepicker #dpStartDate="ngbDatepicker">
+                            <div class="input-group-append">
+                                <button class="btn btn-outline-secondary calendar" (click)="dpStartDate.toggle()" type="button">Select</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="endDate">End Date</label>
+                        <div class="input-group">
+                            <input required ngModel #endDate="ngModel" class="form-control" placeholder="Select a date" name="dpEndDate" ngbDatepicker #dpEndDate="ngbDatepicker">
+                            <div class="input-group-append">
+                                <button class="btn btn-outline-secondary calendar" (click)="dpEndDate.toggle()" type="button">Select</button>
+                            </div>
+                        </div>
+                    </div>
+                    <p>Political Parties</p>
+                    <div *ngFor="let party of parties" class="form-group">
+                        <div class="form-control">
+                        <label class="checkbox-inline">
+                            <input type="checkbox" name="{{party.name}}" value="{{party.id}}" (click)="handlePartyClick(party.id)" /> {{party.name}}
+                        </label>
+                        </div>
+                    </div>
                 </div>
-      
                 <div class="form-floating">
-                  <input required minlength="6" ngModel #username="ngModel" type="text" class="form-control" id="username" name="username" placeholder="Username">
-                  <label for="username">Username</label>
-                  <div *ngIf="username.dirty && username.touched && username.invalid">
-                      <div class="alert-danger text-center" *ngIf="username.errors?.required">
-                          Required field
-                      </div>
-                      <div class="alert-danger text-center" *ngIf="username.errors?.minlength">
-                          The username must have at least 6 characters
-                      </div>
-                  </div>
+                    <button [disabled]="!f.valid" class="w-100 btn btn-lg btn-primary" type="submit">Submit</button>
                 </div>
-      
-                <div class="form-floating">
-                  <input required ngModel #password="ngModel" minlength="6" type="password" class="form-control" id="password" name="password" placeholder="Password">
-                  <label for="password">Password</label>
-                  <div *ngIf="password.dirty && password.touched && password.invalid">
-                      <div class="alert-danger text-center" *ngIf="password.errors?.required">
-                          Required field
-                      </div>
-                      <div class="alert-danger text-center" *ngIf="password.errors?.minlength">
-                          The passowrd must have at least 6 characters
-                      </div>
-                  </div>
-                </div>
-                <div class="form-floating">
-                    <button [disabled]="!f.valid" class="w-100 btn btn-lg btn-primary" type="submit">Sign Up</button>
-                </div>
-              </form>
+            </form>
         </ng-template>
     </ngb-panel>
+    <ngb-alert *ngIf="creationFailed" class="show fade text-center" ng-reflect-type="danger" type='danger' (closed)="closeAlert()">
+        {{alert}}
+    </ngb-alert>  
 </ngb-accordion>

@@ -21,6 +21,18 @@ export class AdminPartyListComponent implements OnInit {
     this.partyService.partyDeleted.subscribe(() => {
       this.getAllParties();
     });
+    this.electionService.electionDeleted.subscribe(() => {
+      this.getAllParties();
+      this.getAllElections();
+    });
+    this.electionService.electionUpdated.subscribe(() => {
+      this.getAllParties();
+      this.getAllElections();
+    });
+    this.electionService.newElectionCreated.subscribe(() => {
+      this.getAllParties();
+      this.getAllElections();
+    });
   }
 
   ngOnInit(): void {
@@ -43,8 +55,8 @@ export class AdminPartyListComponent implements OnInit {
   deletePossibility = (id: number): boolean => {
     const today: Date = new Date();
     let removable: boolean = true;
-    this.elections.filter((value) => value.id == id).forEach((value) => {
-      removable =  !(new Date(value.startDate) <= today);
+    this.elections.filter((value) => value.parties.indexOf(id) > -1).forEach((value) => {
+      removable =  new Date(value.startDate) > today
     });
     return removable;
   }

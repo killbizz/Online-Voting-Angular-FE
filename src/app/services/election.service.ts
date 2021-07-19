@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { EventEmitter, Injectable, Output } from '@angular/core';
 import { Election } from '../classes/Election';
 import getBackendResponse from '../lib/endpoints';
 
@@ -6,6 +6,10 @@ import getBackendResponse from '../lib/endpoints';
   providedIn: 'root'
 })
 export class ElectionService {
+
+  @Output() newElectionCreated = new EventEmitter();
+  @Output() electionDeleted = new EventEmitter();
+  @Output() electionUpdated = new EventEmitter();;
 
   constructor() { }
 
@@ -29,10 +33,20 @@ export class ElectionService {
 
   newElection = async (election: Election): Promise<boolean> => {
     const { response } = ( await getBackendResponse("election", "POST", JSON.stringify(election))).props;
+    if(response.error !== undefined){
+      return false;
+    }
+    this.newElectionCreated.emit();
+    return true;
+  }
+
+  updateElection = async (election: Election): Promise<boolean> => {
+    const { response } = ( await getBackendResponse("election", "PUT", JSON.stringify(election))).props;
     console.log(response);
     if(response.error !== undefined){
       return false;
     }
+    this.electionUpdated.emit();
     return true;
   }
 
@@ -42,6 +56,7 @@ export class ElectionService {
     if(response.error !== undefined){
       return false;
     }
+    this.electionDeleted.emit();
     return true;
   }
 

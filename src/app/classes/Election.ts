@@ -5,9 +5,9 @@ export class Election {
     startDate: string;
     endDate: string;
     parties: number[];
-    votes: number[];
+    votes: number[] | undefined;
 
-    constructor(id: number, name: string, type: string, startDate: string, endDate: string, parties: number[], votes: number[]){
+    constructor(id: number, name: string, type: string, startDate: string, endDate: string, parties: number[], votes: number[] | undefined = undefined){
         this.id = id;
         this.name = name;
         this.type = type;

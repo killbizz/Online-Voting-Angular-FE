@@ -11,7 +11,17 @@ export class AdminElectionListComponent implements OnInit {
 
   elections: Election[] = [];
 
-  constructor(private electionService: ElectionService) { }
+  constructor(private electionService: ElectionService) {
+    this.electionService.newElectionCreated.subscribe(() => {
+      this.getAllElections();
+    });
+    this.electionService.electionDeleted.subscribe(() => {
+      this.getAllElections();
+    });
+    this.electionService.electionUpdated.subscribe(() => {
+      this.getAllElections();
+    });
+   }
 
   ngOnInit(): void {
     this.getAllElections();
