@@ -48,6 +48,11 @@ export default class Fetcher {
         error: "error 403, forbidden"
       }
     }
+    if(method === "DELETE" && req.status === 204){
+      return {
+        status: 204
+      }
+    }
     const data = req.json();
     return data;
   }
