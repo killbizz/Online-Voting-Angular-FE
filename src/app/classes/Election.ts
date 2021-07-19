@@ -1,5 +1,5 @@
 export class Election {
-    id: string;
+    id: number;
     name: string;
     type: string;
     startDate: string;
@@ -7,7 +7,7 @@ export class Election {
     parties: number[];
     votes: number[];
 
-    constructor(id: string, name: string, type: string, startDate: string, endDate: string, parties: number[], votes: number[]){
+    constructor(id: number, name: string, type: string, startDate: string, endDate: string, parties: number[], votes: number[]){
         this.id = id;
         this.name = name;
         this.type = type;
