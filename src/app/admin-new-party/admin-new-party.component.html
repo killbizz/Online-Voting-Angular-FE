@@ -1,0 +1,61 @@
+<ngb-accordion 
+    class="mx-auto text-center"
+    #myaccordion="ngbAccordion"
+    type="'secondary'">
+    <ngb-panel type="secondary-outline">
+        <ng-template ngbPanelTitle>
+            <a type="button" class="btn btn-outline-secondary btn-lg px-4">New Party</a>
+        </ng-template>
+        <ng-template ngbPanelContent>
+            <form name="newPartyForm" #f="ngForm" (ngSubmit)="newParty(f, $event)">      
+                <div class="form-floating">
+                  <input required minlength="6" ngModel #name="ngModel" type="text" class="form-control" id="name" name="name" placeholder="Name">
+                  <label for="name">Party Name</label>
+                  <div *ngIf="name.dirty && name.touched && name.invalid">
+                      <div class="alert-danger text-center" *ngIf="name.errors?.required">
+                          Required field
+                      </div>
+                      <div class="alert-danger text-center" *ngIf="name.errors?.minlength">
+                        The name must have at least 6 characters
+                    </div>
+                  </div>
+                </div>
+      
+                <div class="form-floating">
+                  <input required minlength="6" ngModel #candidate="ngModel" type="text" class="form-control" id="candidate" name="candidate" placeholder="Candidate">
+                  <label for="username">Candidate</label>
+                  <div *ngIf="candidate.dirty && candidate.touched && candidate.invalid">
+                      <div class="alert-danger text-center" *ngIf="candidate.errors?.required">
+                          Required field
+                      </div>
+                      <div class="alert-danger text-center" *ngIf="candidate.errors?.minlength">
+                          The candidate must have at least 6 characters
+                      </div>
+                  </div>
+                </div>
+      
+                <div class="form-floating">
+                    <div class="form-group row">
+                        <label for="base64logo" class="col-sm-2 col-form-label">Party Logo: </label>
+                        <div class="col-sm-10 mt-3">
+                            <input required ngModel #base64logo="ngModel" type="file" class="form-control" id="base64logo" name="base64logo">
+                        </div>
+                    </div>
+                    <div *ngIf="base64logo.dirty && base64logo.touched && base64logo.invalid">
+                        <div class="alert-danger text-center" *ngIf="base64logo.errors?.required">
+                            Image upload required
+                        </div>
+                    </div>
+                </div>
+                <div class="form-floating">
+                    <button [disabled]="!f.valid" class="w-100 btn btn-lg btn-primary" type="submit">Submit</button>
+                </div>
+            </form>
+        </ng-template>
+    </ngb-panel>
+</ngb-accordion>
+<div>
+    <ngb-alert *ngIf="creationFailed" class="show fade text-center" ng-reflect-type="danger" type='danger' (closed)="closeAlert()">
+        {{alert}}
+    </ngb-alert>  
+</div>

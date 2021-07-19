@@ -18,6 +18,8 @@ import { AdminNewElectionComponent } from './admin-new-election/admin-new-electi
 import { AdminElectionListComponent } from './admin-election-list/admin-election-list.component';
 import { ElectionService } from './services/election.service';
 import { AdminElectionDetailComponent } from './admin-election-detail/admin-election-detail.component';
+import { AdminNewPartyComponent } from './admin-new-party/admin-new-party.component';
+import { AdminPartyListComponent } from './admin-party-list/admin-party-list.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +32,9 @@ import { AdminElectionDetailComponent } from './admin-election-detail/admin-elec
     AdminDashboardComponent,
     AdminNewElectionComponent,
     AdminElectionListComponent,
-    AdminElectionDetailComponent
+    AdminElectionDetailComponent,
+    AdminNewPartyComponent,
+    AdminPartyListComponent
   ],
   imports: [
     BrowserModule,
