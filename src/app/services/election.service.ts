@@ -36,4 +36,13 @@ export class ElectionService {
     return true;
   }
 
+  deleteElection = async (id: number): Promise<boolean> => {
+    const { response } = ( await getBackendResponse(`election/${id}`, "DELETE", null)).props;
+    console.log(response);
+    if(response.error !== undefined){
+      return false;
+    }
+    return true;
+  }
+
 }
