@@ -39,6 +39,8 @@ export class AuthService {
     localStorage.setItem("jwtToken", response.jwtToken);
     // TODO : creo un endpoint nel backend che mi restituisca il ruolo dato un JWT
     localStorage.setItem("userRole", response.role);
+    // TODO : creo un endpoint nel backend che mi restituisca lo userId dato un JWT
+    localStorage.setItem("userId", response.userId);
     this.userSignedIn.emit();
     return true;
   }
@@ -57,8 +59,13 @@ export class AuthService {
   logout(): void {
     localStorage.removeItem("jwtToken");
     localStorage.removeItem("userRole");
+    localStorage.removeItem("userId");
     this.userLogged = false;
     this.userRole = null;
     this.userLoggedOut.emit();
+  }
+
+  getUserId() {
+    return localStorage.getItem("userId");
   }
 }
