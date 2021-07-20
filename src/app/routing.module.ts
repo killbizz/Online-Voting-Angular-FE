@@ -1,3 +1,4 @@
+import { UserElectionDetailComponent } from './user-election-detail/user-election-detail.component';
 import { UserDashboardComponent } from './user-dashboard/user-dashboard.component';
 import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
 import { SignUpComponent } from './sign-up/sign-up.component';
@@ -37,7 +38,12 @@ const routes : Routes = [
     path: 'user-dashboard',
     component: UserDashboardComponent,
     canActivate: [RouteGuardService]
-  }
+  },
+   {
+     path: 'user-dashboard/election/:id',
+     component: UserElectionDetailComponent,
+     canActivate: [RouteGuardService]
+   }
 ]
 
 
