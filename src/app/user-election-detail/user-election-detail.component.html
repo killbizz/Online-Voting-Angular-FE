@@ -1,18 +1,42 @@
 <h1 class="text-center my-4">{{election.name}}</h1>
-<h3 class="text-center my-4">Rules</h3>
-<p class="text-center">dfbasbvakbvihar vhar var vrahk vrkrhja vrhbaivberhjvberajv arvbrabvjarbvjab</p>
+
+<ngb-accordion 
+    class="mx-auto text-center custom_accordion my-4"
+    #myaccordion="ngbAccordion"
+    type="'secondary'">
+    <ngb-panel type="secondary-outline">
+        <ng-template ngbPanelTitle>
+            <a type="button" class="btn btn-outline-secondary btn-lg px-4">Rules</a>
+        </ng-template>
+        <ng-template ngbPanelContent>
+            <ul>
+                <li>Only <strong>one</strong> political party can be voted on;</li>
+                <li>
+                    To <strong>vote</strong>, click on the preferred political party. You can do the same operation again on a different card to <strong>replace the vote</strong> by indicating another political party;
+                </li>
+                <li>
+                    Once you have selected your favorite political party, click on the <strong>End Voting</strong> button. At this point, a window will open in which you can confirm your vote or go back to change your choice. This button will remain disabled until a choice is made; 
+                </li>
+                <li>
+                    Once you have clicked the End Voting button, the operation will end and you will no longer be able to go back to change your choice.
+                </li>
+            </ul>
+        </ng-template>
+    </ngb-panel>
+</ngb-accordion>
+
 <h3 class="text-center my-4">Political Parties</h3>
 <div id="cards_landscape_wrap-2">
     <div class="container">
         <div class="row">
             <div *ngFor="let party of parties" class="col-xs-12 col-sm-6 col-md-3 col-lg-3">
-                <a href="">
+                <a href="" (click)="selectParty(party.id, $event)">
                     <div class="card-flyer">
                         <div class="text-box">
                             <div class="image-box">
                                 <img src={{party.base64logo}} alt="{{party.name}} Logo" />
                             </div>
-                            <div class="text-container">
+                            <div [class.active]="selectedParty?.id === party.id" class="text-container">
                                 <h6>{{party.name}}</h6>
                                 <p>{{party.candidate}}</p>
                             </div>
@@ -20,67 +44,7 @@
                     </div>
                 </a>
             </div>
-            <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3">
-                <a href="">
-                    <div class="card-flyer">
-                        <div class="text-box">
-                            <div class="image-box">
-                                <img src="https://cdn.pixabay.com/photo/2018/03/30/15/11/deer-3275594_960_720.jpg" alt="" />
-                            </div>
-                            <div class="text-container">
-                                <h6>Title 01</h6>
-                                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.</p>
-                            </div>
-                        </div>
-                    </div>
-                </a>
-            </div>
-            <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3">
-                <a href="">
-                    <div class="card-flyer">
-                        <div class="text-box">
-                            <div class="image-box">
-                                <img src="https://cdn.pixabay.com/photo/2018/04/09/19/55/low-poly-3305284_960_720.jpg" alt="" />
-                            </div>
-                            <div class="text-container">                                    
-                                <h6>Title 02</h6>
-                                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.</p>
-                            </div>
-                        </div>
-                    </div>
-                </a>
-            </div>
-            <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3">
-                <a href="">
-                    <div class="card-flyer">
-                        <div class="text-box">
-                            <div class="image-box">
-                                <img src="https://cdn.pixabay.com/photo/2018/04/06/13/46/poly-3295856_960_720.png" alt="" />
-                            </div>
-
-                            <div class="text-container">
-                                <h6>Title 03</h6>
-                               <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.</p>
-                            </div>
-                        </div>
-                    </div>
-                </a>
-            </div>
-            <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3">
-                <a href="">
-                    <div class="card-flyer">
-                        <div class="text-box">
-                            <div class="image-box">
-                                <img src="https://cdn.pixabay.com/photo/2018/03/30/15/12/dog-3275593_960_720.jpg" alt="" />
-                            </div>
-                            <div class="text-container">
-                                <h6>Title 04</h6>
-                               <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.</p>
-                            </div>
-                        </div>
-                    </div>
-                </a>
-            </div>
+        </div>
     </div>
 </div>
 
@@ -92,7 +56,8 @@
       </button>
     </div>
     <div class="modal-body">
-      
+      <h6>You voted for: <b>{{selectedParty?.name}} - {{selectedParty?.candidate}}</b></h6>
+      <p>Are you sure of your choice? clicking the <em>Confirm</em> button the action cannot be canceled </p>
     </div>
     <div class="modal-footer">
       <button  type="button" class="btn btn-outline-primary btn-sm px-4 me-md-2" (click)="modal.close('Vote'); confirmVote()">Confirm</button>
@@ -100,5 +65,5 @@
     </div>
 </ng-template>
   
-<button class="btn btn-lg btn-secondary mb-4" (click)="open(content)">Finish Voting</button>
+<button class="btn btn-lg btn-secondary mb-4 mx-auto text-center d-block" [disabled]="selectedParty === undefined" (click)="open(content)">Finish Voting</button>
   

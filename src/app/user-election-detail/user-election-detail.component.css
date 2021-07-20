@@ -77,5 +77,26 @@
     text-transform: uppercase;
     font-family: 'Roboto Black', sans-serif;
     letter-spacing: 1px;
-    color: #00acc1;
+    color: black;
+  }
+
+  ul {
+    list-style: none;
+  }
+  ul li::before {
+    content: "📌";
+    display: inline-block;
+    margin-right: 0.2rem;
+  }
+
+  .custom_accordion ul {
+    text-align: left;
+  }
+
+  ::ng-deep .card-header{
+    background-color: white;
+  }
+
+  div.active {
+    background-color: #268bf0;
   }

@@ -23,6 +23,7 @@ import { UserDashboardComponent } from './user-dashboard/user-dashboard.componen
 import { UserElectionListComponent } from './user-election-list/user-election-list.component';
 import { UserElectionHistoryComponent } from './user-election-history/user-election-history.component';
 import { UserElectionDetailComponent } from './user-election-detail/user-election-detail.component';
+import { DatePipe } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -50,7 +51,7 @@ import { UserElectionDetailComponent } from './user-election-detail/user-electio
     NgbModule,
     FormsModule
   ],
-  providers: [AuthService, ElectionService],
+  providers: [AuthService, ElectionService, DatePipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
