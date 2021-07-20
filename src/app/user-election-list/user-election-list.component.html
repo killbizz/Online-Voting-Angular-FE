@@ -1,0 +1,22 @@
+<table class="table mb-4">
+    <thead class="thead-light">
+      <tr>
+        <th scope="col">ID</th>
+        <th scope="col">Name</th>
+        <th scope="col">Start Date</th>
+        <th scope="col">End Date</th>
+        <th scope="col">Action</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let election of elections">
+            <th scope="row">{{election.id}}</th>
+            <td>{{election.name}}</td>
+            <td>{{election.startDate}}</td>
+            <td>{{election.endDate}}</td>
+            <td>
+                <app-admin-election-detail [election] = "election"></app-admin-election-detail>
+            </td>
+        </tr>
+    </tbody>
+  </table>

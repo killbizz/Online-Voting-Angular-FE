@@ -1,7 +1,6 @@
 import { HomepageComponent } from './homepage/homepage.component';
 import { FormsModule } from '@angular/forms';
 import { AuthService } from './services/auth.service';
-import { ServicesService } from './services/services.service';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
@@ -20,6 +19,10 @@ import { ElectionService } from './services/election.service';
 import { AdminElectionDetailComponent } from './admin-election-detail/admin-election-detail.component';
 import { AdminNewPartyComponent } from './admin-new-party/admin-new-party.component';
 import { AdminPartyListComponent } from './admin-party-list/admin-party-list.component';
+import { UserDashboardComponent } from './user-dashboard/user-dashboard.component';
+import { UserElectionListComponent } from './user-election-list/user-election-list.component';
+import { UserElectionHistoryComponent } from './user-election-history/user-election-history.component';
+import { UserElectionDetailComponent } from './user-election-detail/user-election-detail.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +37,11 @@ import { AdminPartyListComponent } from './admin-party-list/admin-party-list.com
     AdminElectionListComponent,
     AdminElectionDetailComponent,
     AdminNewPartyComponent,
-    AdminPartyListComponent
+    AdminPartyListComponent,
+    UserDashboardComponent,
+    UserElectionListComponent,
+    UserElectionHistoryComponent,
+    UserElectionDetailComponent
   ],
   imports: [
     BrowserModule,
@@ -43,7 +50,7 @@ import { AdminPartyListComponent } from './admin-party-list/admin-party-list.com
     NgbModule,
     FormsModule
   ],
-  providers: [ServicesService, AuthService, ElectionService],
+  providers: [AuthService, ElectionService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
