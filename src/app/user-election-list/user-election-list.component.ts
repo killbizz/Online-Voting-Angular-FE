@@ -31,4 +31,13 @@ export class UserElectionListComponent implements OnInit {
     this.elections = await this.electionService.getElections();
   }
 
+  userAlreadyVoted() {
+    return false;
+  }
+
+  votePossibility(startDate: string, endDate: string) {
+    const today: Date = new Date();
+    return new Date(startDate) <= today && new Date(endDate) >= today && !this.userAlreadyVoted();
+  }
+
 }

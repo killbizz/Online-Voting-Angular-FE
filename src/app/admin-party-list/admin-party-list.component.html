@@ -15,9 +15,8 @@
             <td>{{party.name.charAt(0).toUpperCase() + party.name.slice(1)}}</td>
             <td>{{party.candidate.charAt(0).toUpperCase() + party.candidate.slice(1)}}</td>
             <td>
-                <span *ngIf="!deletePossibility(party.id)" class="d-inline-block" tabindex="0" data-toggle="tooltip" title="This party is present in an old vote or in one that is currently open">
-                    <button type="button" [disabled]="deletePossibility(party.id) ? null : 'disabled'" class="btn btn-danger btn-sm px-4 me-md-2" (click)="deleteParty(party.id)"
-                    data-toggle="tooltip" data-placement="top" title="Tooltip on top">Delete</button>
+                <span *ngIf="!deletePossibility(party.id)" class="d-inline-block" tabindex="0" ngbTooltip="This party is present in an old votation or in one that is currently open">
+                    <button type="button" [disabled]="deletePossibility(party.id) ? null : 'disabled'" class="btn btn-danger btn-sm px-4 me-md-2" (click)="deleteParty(party.id)">Delete</button>
                 </span>
                 <button *ngIf="deletePossibility(party.id)" type="button" [disabled]="deletePossibility(party.id) ? null : 'disabled'" class="btn btn-danger btn-sm px-4 me-md-2" (click)="deleteParty(party.id)">Delete</button>
             </td>

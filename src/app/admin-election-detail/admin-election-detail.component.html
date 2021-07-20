@@ -56,14 +56,12 @@
       </form> 
     </div>
     <div class="modal-footer">
-      <span *ngIf="!updateOrDeletePossibility()" class="d-inline-block" tabindex="0" data-toggle="tooltip" title="This election has already ended or is in progress right now">
-        <button type="button" [disabled]="updateOrDeletePossibility() ? null : 'disabled'" class="btn btn-warning btn-sm px-4 me-md-2" (click)="enableUpdateElection()"
-        data-toggle="tooltip" data-placement="top" title="Tooltip on top">Edit</button>
+      <span *ngIf="!updateOrDeletePossibility()" class="d-inline-block" tabindex="0" [ngbTooltip]="!updateOrDeletePossibility() ? 'This election has already ended or is in progress right now' : ''">
+        <button type="button" [disabled]="updateOrDeletePossibility() ? null : 'disabled'" class="btn btn-warning btn-sm px-4 me-md-2" (click)="enableUpdateElection()">Edit</button>
       </span>
       <button *ngIf="!userWantsToUpdate && updateOrDeletePossibility()" type="button" class="btn btn-warning btn-sm px-4 me-md-2" (click)="enableUpdateElection()">Edit</button>
-      <span *ngIf="!updateOrDeletePossibility()" class="d-inline-block" tabindex="0" data-toggle="tooltip" title="This election has already ended or is in progress right now">
-        <button type="button" [disabled]="updateOrDeletePossibility() ? null : 'disabled'" class="btn btn-danger btn-sm px-4 me-md-2" (click)="modal.close('Delete item'); deleteElection()"
-        data-toggle="tooltip" data-placement="top" title="Tooltip on top">Delete</button>
+      <span *ngIf="!updateOrDeletePossibility()" class="d-inline-block" tabindex="0" [ngbTooltip]="!updateOrDeletePossibility() ? 'This election has already ended or is in progress right now' : ''">
+        <button type="button" [disabled]="updateOrDeletePossibility() ? null : 'disabled'" class="btn btn-danger btn-sm px-4 me-md-2" (click)="modal.close('Delete item'); deleteElection()">Delete</button>
       </span>
       <button *ngIf="!userWantsToUpdate && updateOrDeletePossibility()" type="button" class="btn btn-danger btn-sm px-4 me-md-2" (click)="modal.close('Delete item'); deleteElection()">Delete</button>
     </div>
