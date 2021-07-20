@@ -15,10 +15,10 @@
             <td>{{election.startDate}}</td>
             <td>{{election.endDate}}</td>
             <td>
-              <span *ngIf="!votePossibility(election.startDate,election.endDate)" class="d-inline-block" tabindex="0" ngbTooltip="This election is terminated or is not already openend">
-                <button type="button" [disabled]="votePossibility(election.startDate,election.endDate) ? null : 'disabled'" class="btn btn-outline-secondary btn-sm px-4 me-md-2">Vote!</button>
+            <span *ngIf="!votePossibility(election.id, election.startDate, election.endDate)" class="d-inline-block" tabindex="0" [ngbTooltip]=toolTip>
+                <button type="button" [disabled]="votePossibility(election.id, election.startDate, election.endDate) ? null : 'disabled'" class="btn btn-outline-secondary btn-sm px-4 me-md-2">Vote!</button>
             </span>
-              <a *ngIf="votePossibility(election.startDate,election.endDate)" routerLink="election/{{election.id}}"><button type="button" class="btn btn-secondary btn-sm px-4 me-md-2">Vote!</button></a>
+                <a *ngIf="votePossibility(election.id, election.startDate, election.endDate)" routerLink="election/{{election.id}}"><button type="button" class="btn btn-secondary btn-sm px-4 me-md-2">Vote!</button></a>
             </td>
         </tr>
     </tbody>

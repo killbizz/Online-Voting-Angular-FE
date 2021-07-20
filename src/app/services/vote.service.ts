@@ -31,14 +31,14 @@ export class VoteService {
   }
 
   getVotesByUserId = async (): Promise<Vote[]> => {
-    const id: string | null = this.authService.getUserId();
+    const id: string = this.authService.getUserId()!;
     const { response } = (
-      await getBackendResponse(`vote/${id}`, "GET", null)
+      await getBackendResponse("vote", "GET", null)
     ).props;
     if (response._embedded === undefined) {
       return [];
     }
-    return response._embedded.vote.sort((a: Vote ,b : Vote) => {
+    return response._embedded.vote.filter((value: Vote) => value.userId === id ).sort((a: Vote ,b : Vote) => {
       if(a.date < b.date){
         return -1;
       }
