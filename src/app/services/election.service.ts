@@ -28,7 +28,17 @@ export class ElectionService {
         return 1;
       }
       return 0;
-    })
+    });
+  }
+
+  getElection = async (id: number): Promise<Election> => {
+    const { response } = (
+      await getBackendResponse(`election/${id}`, "GET", null)
+    ).props;
+    if (response === undefined) {
+      console.log(response);
+    }
+    return response;
   }
 
   newElection = async (election: Election): Promise<boolean> => {

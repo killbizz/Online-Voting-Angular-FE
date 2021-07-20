@@ -30,6 +30,16 @@ export class PartyService {
     })
   }
 
+  getParty = async (id: number): Promise<Party> => {
+    const { response } = (
+      await getBackendResponse(`party/${id}`, "GET", null)
+    ).props;
+    if (response === undefined) {
+      console.log(response);
+    }
+    return response;
+  }
+
   newParty = async (party: Party): Promise<boolean> => {
     const { response } = ( await getBackendResponse("party", "POST", JSON.stringify(party))).props;
     if(response.error !== undefined){
