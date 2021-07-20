@@ -20,7 +20,14 @@ export class AdminNewElectionComponent implements OnInit {
   creationFailed: boolean = false;
   alert: string | null = "Error on creating a new election";
 
-  constructor(private partyService: PartyService, private electionService: ElectionService) { }
+  constructor(private partyService: PartyService, private electionService: ElectionService) {
+    this.partyService.newPartyCreated.subscribe(() => {
+      this.getAllParties();
+    });
+    this.partyService.partyDeleted.subscribe(() => {
+      this.getAllParties();
+    });
+   }
 
   ngOnInit(): void {
     this.today = new Date();
