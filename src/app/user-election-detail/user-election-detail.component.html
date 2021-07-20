@@ -1,1 +1,104 @@
-<p>user-election-detail works!</p>
+<h1 class="text-center my-4">{{election.name}}</h1>
+<h3 class="text-center my-4">Rules</h3>
+<p class="text-center">dfbasbvakbvihar vhar var vrahk vrkrhja vrhbaivberhjvberajv arvbrabvjarbvjab</p>
+<h3 class="text-center my-4">Political Parties</h3>
+<div id="cards_landscape_wrap-2">
+    <div class="container">
+        <div class="row">
+            <div *ngFor="let party of parties" class="col-xs-12 col-sm-6 col-md-3 col-lg-3">
+                <a href="">
+                    <div class="card-flyer">
+                        <div class="text-box">
+                            <div class="image-box">
+                                <img src={{party.base64logo}} alt="{{party.name}} Logo" />
+                            </div>
+                            <div class="text-container">
+                                <h6>{{party.name}}</h6>
+                                <p>{{party.candidate}}</p>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3">
+                <a href="">
+                    <div class="card-flyer">
+                        <div class="text-box">
+                            <div class="image-box">
+                                <img src="https://cdn.pixabay.com/photo/2018/03/30/15/11/deer-3275594_960_720.jpg" alt="" />
+                            </div>
+                            <div class="text-container">
+                                <h6>Title 01</h6>
+                                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.</p>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3">
+                <a href="">
+                    <div class="card-flyer">
+                        <div class="text-box">
+                            <div class="image-box">
+                                <img src="https://cdn.pixabay.com/photo/2018/04/09/19/55/low-poly-3305284_960_720.jpg" alt="" />
+                            </div>
+                            <div class="text-container">                                    
+                                <h6>Title 02</h6>
+                                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.</p>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3">
+                <a href="">
+                    <div class="card-flyer">
+                        <div class="text-box">
+                            <div class="image-box">
+                                <img src="https://cdn.pixabay.com/photo/2018/04/06/13/46/poly-3295856_960_720.png" alt="" />
+                            </div>
+
+                            <div class="text-container">
+                                <h6>Title 03</h6>
+                               <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.</p>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3">
+                <a href="">
+                    <div class="card-flyer">
+                        <div class="text-box">
+                            <div class="image-box">
+                                <img src="https://cdn.pixabay.com/photo/2018/03/30/15/12/dog-3275593_960_720.jpg" alt="" />
+                            </div>
+                            <div class="text-container">
+                                <h6>Title 04</h6>
+                               <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.</p>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+    </div>
+</div>
+
+<ng-template #content let-modal>
+    <div class="modal-header bg-secondary text-white">
+      <h4 class="modal-title" id="modal-basic-title">Confirm your vote</h4>
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      
+    </div>
+    <div class="modal-footer">
+      <button  type="button" class="btn btn-outline-primary btn-sm px-4 me-md-2" (click)="modal.close('Vote'); confirmVote()">Confirm</button>
+      <button  type="button" class="btn btn-outline-danger btn-sm px-4 me-md-2" (click)="modal.close('Turn back')">Cancel</button>
+    </div>
+</ng-template>
+  
+<button class="btn btn-lg btn-secondary mb-4" (click)="open(content)">Finish Voting</button>
+  
