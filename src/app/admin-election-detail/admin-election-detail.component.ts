@@ -92,7 +92,7 @@ export class AdminElectionDetailComponent implements OnInit {
         endDate = endDate === "" ? this.election.endDate : endDate;
         this.partiesInModifiedElection = this.partiesInModifiedElection.length === 0 ? this.election.parties : this.partiesInModifiedElection;
 
-        const election: Election = new Election(this.election.id,name,type,startDate,endDate,this.partiesInModifiedElection);
+        const election: Election = new Election(this.election.id,name,type,startDate,endDate,this.partiesInModifiedElection, this.election.votes);
 
         const result = await this.electionService.newElection(election);
         if(result){
