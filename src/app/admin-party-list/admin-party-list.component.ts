@@ -53,10 +53,13 @@ export class AdminPartyListComponent implements OnInit {
   }
 
   deletePossibility = (id: number): boolean => {
-    const today: Date = new Date();
+    let today = new Date(new Date().toDateString());
+    today.setHours(23,59,59,999);
     let removable: boolean = true;
     this.elections.filter((value) => value.parties.indexOf(id) > -1).forEach((value) => {
-      removable =  new Date(value.startDate) > today
+      if(new Date(value.startDate) < today){
+        removable =  false;
+      }
     });
     return removable;
   }

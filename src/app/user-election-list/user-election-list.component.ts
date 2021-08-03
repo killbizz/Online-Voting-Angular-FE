@@ -17,12 +17,16 @@ export class UserElectionListComponent implements OnInit {
   userId!: string;
   toolTip: string = "";
 
-  constructor(private electionService: ElectionService, private voteService: VoteService, private authService: AuthService) {   }
+  constructor(private electionService: ElectionService, private voteService: VoteService, private authService: AuthService) {
+    this.voteService.newVoteCreated.subscribe(() => {
+      this.getInvolvedVotes();
+    })
+     }
 
   async ngOnInit() {
     this.getAllElections();
     this.getInvolvedVotes();
-    this.userId = await this.authService.getUserId()!;
+    this.userId = this.authService.getUserId()!;
   }
 
   getAllElections = async () => {

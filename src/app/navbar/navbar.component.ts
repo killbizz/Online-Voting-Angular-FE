@@ -12,6 +12,7 @@ export class NavbarComponent implements OnInit {
   isUserLogged: boolean = false;
   isUserInLoginOrSignUpPage: boolean = false;
   isUserAdmin: boolean = false;
+  isNavbarCollapsed = true;
 
   constructor(private authService: AuthService, private router: Router) {
     this.authService.userSignedIn.subscribe(() => {

@@ -11,8 +11,8 @@
             <form name="newElectionForm" id="newElectionForm" #f="ngForm" (ngSubmit)="newElection(f, $event)">      
                 <div class="form-floating">
                     <div class="form-group row">
-                        <label for="name" class="col-sm-2 col-form-label">Name</label>
-                        <div class="col-sm-10">
+                        <label for="name" class="col-sm-4 col-form-label">Name</label>
+                        <div class="col-sm-8">
                           <input required minlength="6" ngModel #name="ngModel" type="text" class="form-control text-center" id="name" name="name" placeholder="Election Name">
                         </div>
                     </div>
@@ -25,29 +25,46 @@
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label for="type" class="col-sm-2 col-form-label">Type</label>
-                        <div class="col-sm-10">
+                        <label for="type" class="col-sm-4 col-form-label">Type</label>
+                        <div class="col-sm-8">
                             <select class="form-control-plaintext text-center" id="type" name="type">
                                 <option selected >municipal</option>
                                 <option>regional</option>
                             </select>
                         </div>
                     </div>
-                    <div class="form-group">
-                        <label for="startDate">Start Date</label>
+                    <div class="form-group row">
+                        <label for="dpStartDate" class="col-sm-4 col-form-label">Start Date</label>
+                        <div class="col-sm-8">
                         <div class="input-group">
-                            <input required ngModel #startDate="ngModel" class="form-control" placeholder="Select a date" name="dpStartDate" ngbDatepicker #dpStartDate="ngbDatepicker">
+                            <input required ngModel #startDate="ngModel" (ngModelChange)="setStartDate(startDate.value)" class="form-control text-center" placeholder="yyyy-mm-dd" name="dpStartDate" id="dpStartDate" ngbDatepicker #dpStartDate="ngbDatepicker">
                             <div class="input-group-append">
                                 <button class="btn btn-outline-secondary calendar" (click)="dpStartDate.toggle()" type="button">Select</button>
                             </div>
                         </div>
+                        </div>
+                        <div *ngIf="startDate.dirty && startDate.touched && startDate.invalid">
+                            <div class="alert-danger text-center" *ngIf="startDate.errors?.required">
+                                Required field
+                            </div>
+                        </div>
                     </div>
-                    <div class="form-group">
-                        <label for="endDate">End Date</label>
+                    <div class="form-group row">
+                        <label for="dpEndDate" class="col-sm-4 col-form-label">End Date</label>
+                        <div class="col-sm-8">
                         <div class="input-group">
-                            <input required ngModel #endDate="ngModel" class="form-control" placeholder="Select a date" name="dpEndDate" ngbDatepicker #dpEndDate="ngbDatepicker">
+                            <input required ngModel #endDate="ngModel" (ngModelChange)="setEndDate(endDate.value)" class="form-control text-center" placeholder="yyyy-mm-dd" name="dpEndDate" id="dpEndDate" ngbDatepicker #dpEndDate="ngbDatepicker">
                             <div class="input-group-append">
                                 <button class="btn btn-outline-secondary calendar" (click)="dpEndDate.toggle()" type="button">Select</button>
+                            </div>
+                        </div>
+                        </div>
+                        <div *ngIf="endDate.dirty && endDate.touched">
+                            <div *ngIf="endDate.invalid && endDate.errors?.required" class="alert-danger text-center">
+                                Required field
+                            </div>
+                            <div class="alert-danger text-center" *ngIf="!checkEndDateValidity(f)">
+                                The End Date cannot be earlier than the Start Date 
                             </div>
                         </div>
                     </div>

@@ -1,5 +1,5 @@
 <nav class="navbar navbar-expand-md navbar-light" style="background-color: #c2c2c2;" aria-label="Synthesizers Showcase Navbar">
-    <div class="container-fluid">
+    <div class="container">
       <div class="navbar-nav">
         <div class="nav-item text-nowrap">
           <a class="nav-link active" aria-current="page" href="" routerLink="">
@@ -7,34 +7,31 @@
            </a>
         </div>
       </div>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarControl" aria-controls="navbarControl" aria-expanded="false" aria-label="Toggle navigation">
+        <button class="navbar-toggler" (click)="isNavbarCollapsed = !isNavbarCollapsed" type="button" aria-controls="navbarControl" data-bs-toggle="collapse" data-bs-target="#navbarControl" aria-controls="navbarControl" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse justify-content-md-center" id="navbarControl">
-          <ul class="navbar-nav">
-              <li class="nav-item">
-                
-              </li>
+        <div class="collapse navbar-collapse justify-content-md-center" [ngbCollapse]="isNavbarCollapsed" id="navbarControl">
+          <ul class="navbar-nav mx-auto">
               <li class="nav-item">
                 <a class="nav-link" href="" routerLink="">Homepage</a>
               </li>
-              <li class="nav-item">
-                <a *ngIf="isUserLogged && !isUserAdmin" class="nav-link" href="" routerLink="user-dashboard">Elections</a>
+              <li *ngIf="isUserLogged && !isUserAdmin" class="nav-item">
+                <a class="nav-link" href="" routerLink="user-dashboard">Elections</a>
               </li>
-              <li class="nav-item">
-                <a  *ngIf="isUserAdmin" class="nav-link" href="" routerLink="admin-dashboard">Admin Dashboard</a>
+              <li *ngIf="isUserAdmin" class="nav-item">
+                <a class="nav-link" href="" routerLink="admin-dashboard">Admin Dashboard</a>
               </li>
           </ul>
-        </div>
-        <div class="navbar-nav">
+          <div *ngIf="!isUserLogged && !isUserInLoginOrSignUpPage" class="navbar-nav">
             <div class="nav-item text-nowrap">
-              <a *ngIf="!isUserLogged && !isUserInLoginOrSignUpPage" class="nav-link px-3" href="#" (click)="login($event)">Login</a>
+              <a class="nav-link" href="#" (click)="login($event)">Login</a>
             </div>
-        </div>
-        <div class="navbar-nav">
-            <div class="nav-item text-nowrap">
-              <a *ngIf="isUserLogged && !isUserInLoginOrSignUpPage" class="nav-link px-3" href="#" (click)="logout($event)">Logout</a>
-            </div>
+          </div>
+          <div *ngIf="isUserLogged && !isUserInLoginOrSignUpPage" class="navbar-nav">
+              <div class="nav-item text-nowrap">
+                <a class="nav-link" href="#" (click)="logout($event)">Logout</a>
+              </div>
+          </div>
         </div>
     </div>
 </nav>

@@ -2,7 +2,7 @@ import { Election } from '../classes/Election';
 import { Party } from './../classes/Party';
 import { PartyService } from './../services/party.service';
 import { Component, OnInit, ViewChild  } from '@angular/core';
-import { NgForm } from '@angular/forms';
+import { NgForm, NgModel } from '@angular/forms';
 import { NgbAccordion } from '@ng-bootstrap/ng-bootstrap';
 import { ElectionService } from '../services/election.service';
 
@@ -15,6 +15,8 @@ export class AdminNewElectionComponent implements OnInit {
 
   @ViewChild('myaccordion', {static : true}) accordion: NgbAccordion | undefined;
   today: Date = new Date();
+  startDate: Date | undefined;
+  endDate: Date | undefined;
   parties: Party[] = [];
   partiesInNewElection: number[] = [];
   creationFailed: boolean = false;
@@ -72,5 +74,21 @@ export class AdminNewElectionComponent implements OnInit {
     this.alert = null;
   }
 
+  setStartDate(startDate: any){
+    this.startDate = new Date(startDate.year, startDate.month, startDate.day);
+  }
 
+  setEndDate(endDate: any){
+    this.endDate = new Date(endDate.year, endDate.month, endDate.day);
+  }
+  checkEndDateValidity(f: NgForm){
+    let validity: boolean = true;
+    if(this.startDate === undefined)  return true;
+    if(this.endDate === undefined)  return false;
+    validity = new Date(this.startDate) <= new Date(this.endDate);
+    if(!validity){
+      // disable submit button
+    }
+    return validity;
+  }
 }

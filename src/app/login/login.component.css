@@ -1,14 +1,15 @@
 .container{
     height: 100%;
-    display: flex;
+    width: 100% !important;
+    /* display: flex; */
     align-items: center;
     justify-content: center;
 }
 
 .login{
-    margin: 2em;
+    margin: auto;
     text-align: center;
-    display: block;
     height: 100%;
-    width: 30%;
+    min-width: 20em;
+    width: 40%;
 }
