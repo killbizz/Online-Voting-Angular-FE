@@ -50,9 +50,8 @@ export class ElectionService {
     return true;
   }
 
-  updateElection = async (election: Election): Promise<boolean> => {
-    const { response } = ( await getBackendResponse("election", "PUT", JSON.stringify(election))).props;
-    console.log(response);
+  updateElection = async (id: number, election: Election): Promise<boolean> => {
+    const { response } = ( await getBackendResponse(`election/${id}`, "PUT", JSON.stringify(election))).props;
     if(response.error !== undefined){
       return false;
     }

@@ -47,8 +47,6 @@ export class AdminNewElectionComponent implements OnInit {
       const startDate: string = event.target.dpStartDate.value;
       const endDate: string = event.target.dpEndDate.value;
 
-      // TODO : validation using ngForm
-
       const election: Election = new Election(0,name,type,startDate,endDate,this.partiesInNewElection);
 
       const result = await this.electionService.newElection(election);
