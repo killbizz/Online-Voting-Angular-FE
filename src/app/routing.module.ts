@@ -7,7 +7,8 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
 import { HomepageComponent } from './homepage/homepage.component';
-import { RouteGuardService } from 'src/app/services/route-guard.service';
+import { UserRouteGuardService } from 'src/app/services/user-route-guard.service';
+import { AdminRouteGuardService } from './services/admin-route-guard.service';
 
 
 const routes : Routes = [
@@ -32,17 +33,17 @@ const routes : Routes = [
   {
     path: 'admin-dashboard',
     component: AdminDashboardComponent,
-    canActivate: [RouteGuardService]
+    canActivate: [AdminRouteGuardService]
   },
   {
     path: 'user-dashboard',
     component: UserDashboardComponent,
-    canActivate: [RouteGuardService]
+    canActivate: [UserRouteGuardService]
   },
    {
      path: 'user-dashboard/election/:id',
      component: UserElectionDetailComponent,
-     canActivate: [RouteGuardService]
+     canActivate: [UserRouteGuardService]
    }
 ]
 
@@ -56,6 +57,6 @@ const routes : Routes = [
   exports: [
     RouterModule
   ],
-  providers: [RouteGuardService]
+  providers: [UserRouteGuardService, AdminRouteGuardService]
 })
 export class RoutingModule { }
