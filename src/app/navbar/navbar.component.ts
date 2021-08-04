@@ -13,11 +13,13 @@ export class NavbarComponent implements OnInit {
   isUserInLoginOrSignUpPage: boolean = false;
   isUserAdmin: boolean = false;
   isNavbarCollapsed = true;
+  username!: string;
 
   constructor(private authService: AuthService, private router: Router) {
     this.authService.userSignedIn.subscribe(() => {
       this.isUserLogged = true;
       this.isUserAdmin = this.authService.isUserAdmin();
+      this.username = this.authService.getUsername()!;
     });
     this.authService.userLoggedOut.subscribe(() => {
       this.isUserLogged = false;
@@ -36,6 +38,7 @@ export class NavbarComponent implements OnInit {
 
   ngOnInit(): void {
     this.isUserLogged = this.authService.isUserLoggedIn();
+    if(this.isUserLogged) this.username = this.authService.getUsername()!;
     this.isUserAdmin = this.authService.isUserAdmin();
   }
 

@@ -7,8 +7,8 @@ import getBackendResponse from '../lib/endpoints';
 })
 export class AuthService {
 
-  private userLogged: boolean = !!localStorage.getItem("jwtToken");
-  private userRole: String | null = !!localStorage.getItem("jwtToken") ? localStorage.getItem("userRole") : null;
+  private userLogged: boolean = !!localStorage.getItem("userId");
+  private userRole: String | null = !!localStorage.getItem("userId") ? localStorage.getItem("userRole") : null;
   @Output() userSignedIn = new EventEmitter();
   @Output() userLoggedOut = new EventEmitter();
   @Output() userSignedUp = new EventEmitter();
@@ -31,12 +31,12 @@ export class AuthService {
     const { response } = (
       await getBackendResponse("login", "POST", JSON.stringify(credentials))
     ).props;
-    if (response.jwtToken === undefined) {
+    if (response.userId === undefined) {
       return false;
     }
     this.userLogged = true;
     this.userRole = response.role;
-    localStorage.setItem("jwtToken", response.jwtToken);
+    localStorage.setItem("username", response.username);
     // TODO : creo un endpoint nel backend che mi restituisca il ruolo dato un JWT
     localStorage.setItem("userRole", response.role);
     // TODO : creo un endpoint nel backend che mi restituisca lo userId dato un JWT
@@ -57,7 +57,7 @@ export class AuthService {
   }
 
   logout(): void {
-    localStorage.removeItem("jwtToken");
+    localStorage.removeItem("username");
     localStorage.removeItem("userRole");
     localStorage.removeItem("userId");
     this.userLogged = false;
@@ -67,5 +67,9 @@ export class AuthService {
 
   getUserId() {
     return localStorage.getItem("userId");
+  }
+
+  getUsername() {
+    return localStorage.getItem("username");
   }
 }

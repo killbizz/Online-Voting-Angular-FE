@@ -28,7 +28,10 @@
             </div>
           </div>
           <div *ngIf="isUserLogged && !isUserInLoginOrSignUpPage" class="navbar-nav">
-              <div class="nav-item text-nowrap">
+              <div class="nav-item text-nowrap mt-3">
+                <p class="nav-link active">Hello {{username}}</p>
+              </div>
+              <div class="nav-item text-nowrap mt-3">
                 <a class="nav-link" href="#" (click)="logout($event)">Logout</a>
               </div>
           </div>
