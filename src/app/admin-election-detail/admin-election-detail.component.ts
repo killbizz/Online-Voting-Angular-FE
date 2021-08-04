@@ -1,7 +1,7 @@
 import { ElectionService } from './../services/election.service';
 import { NgForm } from '@angular/forms';
 import { Component, Input, OnInit } from '@angular/core';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbInputDatepicker, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Election } from '../classes/Election';
 import { Party } from '../classes/Party';
 import { PartyService } from '../services/party.service';
@@ -15,13 +15,15 @@ export class AdminElectionDetailComponent implements OnInit {
 
   @Input() election!: Election;
   userWantsToUpdate: boolean = false;
+  endDateValidity: boolean = true;
   parties: Party[] = [];
   alert: string | null = null;
   deletionFailed: boolean = false;
   partiesInModifiedElection: number[] = [];
   modificationFailed: boolean = false;
 
-  constructor(private modalService: NgbModal, private partyService: PartyService, private electionService: ElectionService) {    }
+  constructor(private modalService: NgbModal, private partyService: PartyService, private electionService: ElectionService) {
+  }
 
   ngOnInit(): void {
     this.getAllParties();
@@ -48,14 +50,33 @@ export class AdminElectionDetailComponent implements OnInit {
 
   formValidation(name: string, type: string, startDate: string, endDate: string, parties: number[]) {
     let valid: boolean = true;
-    if(name === this.election.name && type === this.election.type && startDate === this.election.startDate && 
-      endDate === this.election.endDate && this.arraysEqual(parties, this.election.parties)){
+    if(name === this.election.name && type === this.election.type && (startDate === this.election.startDate || startDate === "")
+     && (endDate === this.election.endDate || endDate === "") && this.arraysEqual(parties, this.election.parties)){
         this.alert = "At least one field must be modified";
         this.modificationFailed = true;
         valid = false;
+        return valid;
     } else {
       this.modificationFailed = false;
       this.alert = null;
+    }
+    if(endDate !== "") {
+      if(startDate !== "")  {
+        valid = new Date(startDate) <= new Date(endDate);
+        this.endDateValidity = valid;
+      } else{
+        valid = new Date(this.election.startDate) <= new Date(endDate);
+        this.endDateValidity = valid;
+      }
+    } 
+    if(startDate !== "") {
+      if(endDate !== "")  {
+        valid = new Date(startDate) <= new Date(endDate);
+        this.endDateValidity = valid;
+      } else{
+        valid = new Date(startDate) <= new Date(this.election.endDate);
+        this.endDateValidity = valid;
+      }
     }
     return valid;
   }
@@ -77,33 +98,31 @@ export class AdminElectionDetailComponent implements OnInit {
   }
 
   updateElection = async (form: NgForm, event:any) => {
-    if(form.valid){
-      let name: string = event.target.name.value;
-      let type: string = event.target.type.value;
-      let startDate: string = event.target.dpStartDate.value;
-      let endDate: string = event.target.dpEndDate.value;
+    let name: string = event.target.name.value;
+    let type: string = event.target.type.value;
+    let startDate: string = event.target.dpStartDate.value;
+    let endDate: string = event.target.dpEndDate.value;
 
-      const valid: boolean = this.formValidation(name,type,startDate,endDate,this.partiesInModifiedElection);
+    const valid: boolean = this.formValidation(name,type,startDate,endDate,this.partiesInModifiedElection);
 
-      if(valid){
-        name = name === "" ? this.election.name : name;
-        type = type === "" ? this.election.type : type;
-        startDate = startDate === "" ? this.election.startDate : startDate;
-        endDate = endDate === "" ? this.election.endDate : endDate;
-        this.partiesInModifiedElection = this.partiesInModifiedElection.length === 0 ? this.election.parties : this.partiesInModifiedElection;
+    if(valid){
+      name = name === "" ? this.election.name : name;
+      type = type === "" ? this.election.type : type;
+      startDate = startDate === this.election.startDate || startDate === "" ? this.election.startDate : startDate;
+      endDate = endDate === this.election.endDate || endDate === "" ? this.election.endDate : endDate;
+      this.partiesInModifiedElection = this.partiesInModifiedElection.length === 0 ? this.election.parties : this.partiesInModifiedElection;
 
-        const election: Election = new Election(this.election.id,name,type,startDate,endDate,this.partiesInModifiedElection, this.election.votes);
+      const election: Election = new Election(this.election.id,name,type,startDate,endDate,this.partiesInModifiedElection, this.election.votes);
 
-        const result = await this.electionService.newElection(election);
-        if(result){
-          this.modificationFailed = false;
-          this.alert = null;
-          this.modalService.dismissAll('Submit click');
-          this.disableUpdateElection();
-        } else {
-          this.alert = "Error updating the current election";
-          this.modificationFailed = true;
-        }
+      const result = await this.electionService.updateElection(this.election.id, election);
+      if(result){
+        this.modificationFailed = false;
+        this.alert = null;
+        this.modalService.dismissAll('Submit click');
+        this.disableUpdateElection();
+      } else {
+        this.alert = "Error updating the current election";
+        this.modificationFailed = true;
       }
     }
   }
@@ -138,5 +157,16 @@ export class AdminElectionDetailComponent implements OnInit {
     const today: Date = new Date();
     return new Date(this.election.startDate) > today;
   }
+
+  // checkEndDateValidity(){
+  //   let validity: boolean = true;
+  //   if(this.startDate === undefined)  return true;
+  //   if(this.endDate === undefined)  return false;
+  //   validity = new Date(this.startDate) <= new Date(this.endDate);
+  //   if(!validity){
+  //     // disable submit button
+  //   }
+  //   return validity;
+  // }
 
 }

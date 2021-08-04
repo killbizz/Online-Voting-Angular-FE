@@ -25,7 +25,7 @@
         <div class="form-group">
           <label for="startDate">Start Date</label>
           <div class="input-group">
-            <input id="startDate" class="form-control" [readonly]="userWantsToUpdate ? null :'readonly'" value="{{election.startDate}}" name="dpStartDate" ngbDatepicker #dpStartDate="ngbDatepicker">
+            <input id="startDate" class="form-control" [readonly]="userWantsToUpdate ? null :'readonly'" placeholder={{election.startDate}} name="dpStartDate" ngbDatepicker #dpStartDate="ngbDatepicker">
             <div class="input-group-append">
               <button class="btn btn-outline-secondary calendar" [disabled]="userWantsToUpdate ? null : 'disabled'" (click)="dpStartDate.toggle()" type="button">Select</button>
             </div>
@@ -34,9 +34,14 @@
         <div class="form-group">
           <label for="endDate">End Date</label>
           <div class="input-group">
-            <input id="endDate" class="form-control" [readonly]="userWantsToUpdate ? null :'readonly'" value="{{election.endDate}}" name="dpEndDate" ngbDatepicker #dpEndDate="ngbDatepicker">
+            <input ngModel #endDate="ngModel" id="endDate" class="form-control" [readonly]="userWantsToUpdate ? null :'readonly'" placeholder={{election.endDate}} name="dpEndDate" ngbDatepicker #dpEndDate="ngbDatepicker">
             <div class="input-group-append">
               <button class="btn btn-outline-secondary calendar" [disabled]="userWantsToUpdate ? null : 'disabled'" (click)="dpEndDate.toggle()" type="button">Select</button>
+            </div>
+          </div>
+          <div *ngIf="endDate.dirty && endDate.touched">
+            <div class="alert-danger text-center" *ngIf="!endDateValidity">
+                The End Date cannot be earlier than the Start Date 
             </div>
           </div>
         </div>
