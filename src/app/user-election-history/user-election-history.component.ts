@@ -5,6 +5,7 @@ import { Party } from '../classes/Party';
 import { Vote } from '../classes/Vote';
 import { VoteService } from '../services/vote.service';
 import { PartyService } from '../services/party.service';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-user-election-history',
@@ -17,7 +18,7 @@ export class UserElectionHistoryComponent implements OnInit {
   electionsInvolved: Election[] = [];
   partiesInvolved: Party[] = [];
 
-  constructor(private voteService:VoteService, private electionService: ElectionService, private partyService: PartyService) { }
+  constructor(private voteService:VoteService, private electionService: ElectionService, private partyService: PartyService, private authService: AuthService) { }
 
   async ngOnInit() {
     await this.getAllVotes();
@@ -25,7 +26,8 @@ export class UserElectionHistoryComponent implements OnInit {
   }
 
   getAllVotes = async () => {
-    this.votes = await this.voteService.getVotesByUserId();
+    const id: string = this.authService.getUserId()!;
+    this.votes = await this.voteService.getVotesByUserId(id);
   }
 
   getElectionsAndPartiesInvolved = async () => {

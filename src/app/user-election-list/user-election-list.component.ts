@@ -21,7 +21,7 @@ export class UserElectionListComponent implements OnInit {
     this.voteService.newVoteCreated.subscribe(() => {
       this.getInvolvedVotes();
     })
-     }
+    }
 
   async ngOnInit() {
     this.getAllElections();
@@ -34,7 +34,8 @@ export class UserElectionListComponent implements OnInit {
   }
 
   getInvolvedVotes = async () => {
-    this.votesInvolved = await this.voteService.getVotesByUserId();
+    const id: string = this.authService.getUserId()!;
+    this.votesInvolved = await this.voteService.getVotesByUserId(id);
   }
 
   userAlreadyVoted(electionId: number): boolean {

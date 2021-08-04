@@ -30,8 +30,7 @@ export class VoteService {
     })
   }
 
-  getVotesByUserId = async (): Promise<Vote[]> => {
-    const id: string = this.authService.getUserId()!;
+  getVotesByUserId = async (id: string): Promise<Vote[]> => {
     const { response } = (
       await getBackendResponse("vote", "GET", null)
     ).props;
