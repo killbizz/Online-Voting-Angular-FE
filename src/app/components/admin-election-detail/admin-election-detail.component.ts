@@ -1,10 +1,10 @@
-import { ElectionService } from './../services/election.service';
+import { ElectionService } from './../../services/election.service';
 import { NgForm } from '@angular/forms';
 import { Component, Input, OnInit } from '@angular/core';
-import { NgbInputDatepicker, NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { Election } from '../classes/Election';
-import { Party } from '../classes/Party';
-import { PartyService } from '../services/party.service';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { Election } from '../../classes/Election';
+import { Party } from '../../classes/Party';
+import { PartyService } from '../../services/party.service';
 
 @Component({
   selector: 'app-admin-election-detail',
@@ -157,16 +157,5 @@ export class AdminElectionDetailComponent implements OnInit {
     const today: Date = new Date();
     return new Date(this.election.startDate) > today;
   }
-
-  // checkEndDateValidity(){
-  //   let validity: boolean = true;
-  //   if(this.startDate === undefined)  return true;
-  //   if(this.endDate === undefined)  return false;
-  //   validity = new Date(this.startDate) <= new Date(this.endDate);
-  //   if(!validity){
-  //     // disable submit button
-  //   }
-  //   return validity;
-  // }
 
 }

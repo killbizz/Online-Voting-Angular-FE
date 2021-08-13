@@ -1,7 +1,7 @@
-import { PartyService } from './../services/party.service';
+import { PartyService } from './../../services/party.service';
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { Party } from '../classes/Party';
+import { Party } from '../../classes/Party';
 import { Router } from '@angular/router';
 
 @Component({

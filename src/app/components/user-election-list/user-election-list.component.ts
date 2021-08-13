@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { Election } from '../classes/Election';
-import { Vote } from '../classes/Vote';
-import { AuthService } from '../services/auth.service';
-import { ElectionService } from '../services/election.service';
-import { VoteService } from '../services/vote.service';
+import { Election } from '../../classes/Election';
+import { Vote } from '../../classes/Vote';
+import { AuthService } from '../../services/auth.service';
+import { ElectionService } from '../../services/election.service';
+import { VoteService } from '../../services/vote.service';
 
 @Component({
   selector: 'app-user-election-list',

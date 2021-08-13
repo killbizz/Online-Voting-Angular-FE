@@ -1,12 +1,12 @@
-import { UserElectionDetailComponent } from './user-election-detail/user-election-detail.component';
-import { UserDashboardComponent } from './user-dashboard/user-dashboard.component';
-import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
-import { SignUpComponent } from './sign-up/sign-up.component';
-import { LoginComponent } from './login/login.component';
+import { UserElectionDetailComponent } from './components/user-election-detail/user-election-detail.component';
+import { UserDashboardComponent } from './components/user-dashboard/user-dashboard.component';
+import { AdminDashboardComponent } from './components/admin-dashboard/admin-dashboard.component';
+import { SignUpComponent } from './components/sign-up/sign-up.component';
+import { LoginComponent } from './components/login/login.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
-import { HomepageComponent } from './homepage/homepage.component';
+import { HomepageComponent } from './components/homepage/homepage.component';
 import { UserRouteGuardService } from 'src/app/services/user-route-guard.service';
 import { AdminRouteGuardService } from './services/admin-route-guard.service';
 

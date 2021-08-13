@@ -1,11 +1,11 @@
-import { ElectionService } from './../services/election.service';
+import { ElectionService } from './../../services/election.service';
 import { Component, OnInit } from '@angular/core';
-import { Election } from '../classes/Election';
-import { Party } from '../classes/Party';
-import { Vote } from '../classes/Vote';
-import { VoteService } from '../services/vote.service';
-import { PartyService } from '../services/party.service';
-import { AuthService } from '../services/auth.service';
+import { Election } from '../../classes/Election';
+import { Party } from '../../classes/Party';
+import { Vote } from '../../classes/Vote';
+import { VoteService } from '../../services/vote.service';
+import { PartyService } from '../../services/party.service';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-user-election-history',

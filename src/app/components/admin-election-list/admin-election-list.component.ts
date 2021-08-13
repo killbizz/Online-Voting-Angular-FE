@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Election } from '../classes/Election';
-import { ElectionService } from '../services/election.service';
+import { Election } from '../../classes/Election';
+import { ElectionService } from '../../services/election.service';
 
 @Component({
   selector: 'app-admin-election-list',

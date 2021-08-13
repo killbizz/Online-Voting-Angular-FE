@@ -1,7 +1,6 @@
 <table class="table mb-4">
     <thead class="thead-light">
       <tr>
-        <th scope="col">Vote ID</th>
         <th scope="col">Election Name</th>
         <th scope="col">Election Start Date</th>
         <th scope="col">Election End Date</th>
@@ -11,7 +10,6 @@
     </thead>
     <tbody>
         <tr *ngFor="let vote of votes">
-            <th scope="row">{{vote.id}}</th>
             <td>{{getCorrispondingElection(vote.electionId)!.name}}</td>
             <td>{{getCorrispondingElection(vote.electionId)!.startDate}}</td>
             <td>{{getCorrispondingElection(vote.electionId)!.endDate}}</td>

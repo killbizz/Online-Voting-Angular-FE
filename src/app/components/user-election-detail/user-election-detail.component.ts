@@ -1,14 +1,14 @@
-import { PartyService } from './../services/party.service';
-import { Election } from './../classes/Election';
+import { PartyService } from './../../services/party.service';
+import { Election } from './../../classes/Election';
 import { Component, OnInit } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ElectionService } from '../services/election.service';
-import { Party } from '../classes/Party';
-import { Vote } from '../classes/Vote';
+import { ElectionService } from '../../services/election.service';
+import { Party } from '../../classes/Party';
+import { Vote } from '../../classes/Vote';
 import { DatePipe } from '@angular/common'
-import { AuthService } from '../services/auth.service';
-import { VoteService } from '../services/vote.service';
+import { AuthService } from '../../services/auth.service';
+import { VoteService } from '../../services/vote.service';
 
 @Component({
   selector: 'app-user-election-detail',

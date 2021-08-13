@@ -1,10 +1,10 @@
-import { Election } from '../classes/Election';
-import { Party } from './../classes/Party';
-import { PartyService } from './../services/party.service';
+import { Election } from '../../classes/Election';
+import { Party } from './../../classes/Party';
+import { PartyService } from './../../services/party.service';
 import { Component, OnInit, ViewChild  } from '@angular/core';
 import { NgForm, NgModel } from '@angular/forms';
 import { NgbAccordion } from '@ng-bootstrap/ng-bootstrap';
-import { ElectionService } from '../services/election.service';
+import { ElectionService } from '../../services/election.service';
 
 @Component({
   selector: 'app-admin-new-election',

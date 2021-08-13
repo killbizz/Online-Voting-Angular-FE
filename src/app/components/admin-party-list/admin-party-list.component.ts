@@ -1,8 +1,8 @@
-import { Election } from './../classes/Election';
-import { ElectionService } from './../services/election.service';
+import { Election } from './../../classes/Election';
+import { ElectionService } from './../../services/election.service';
 import { Component, OnInit } from '@angular/core';
-import { Party } from '../classes/Party';
-import { PartyService } from '../services/party.service';
+import { Party } from '../../classes/Party';
+import { PartyService } from '../../services/party.service';
 
 @Component({
   selector: 'app-admin-party-list',
